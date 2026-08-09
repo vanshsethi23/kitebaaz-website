@@ -1,0 +1,7 @@
+{
+  "tracks": [
+    { "id": "rooftop",  "label": "Rooftop evening", "file": "rooftop.mp3" },
+    { "id": "festival", "label": "Sankranti",       "file": "festival.mp3" },
+    { "id": "wind",     "label": "Wind only",       "file": "wind.mp3" }
+  ]
+}

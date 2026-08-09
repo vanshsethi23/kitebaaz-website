@@ -1,0 +1,183 @@
+/* KITEBAAZ — reset, ambient layers, loader, cursor, watermark */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-latin);
+  font-variation-settings: var(--wdth-studio);
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+
+::selection { background: var(--o-700); color: var(--paper); }
+
+:lang(hi) { font-family: var(--font-deva); }
+
+/* Focus */
+:focus-visible { outline: 2px solid var(--sky); outline-offset: 3px; }
+
+/* ---------- Loader ---------- */
+.loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--ink);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 28px;
+  transition: opacity 600ms var(--ease-out), visibility 600ms;
+}
+.loader.is-done { opacity: 0; visibility: hidden; }
+.loader__mark { width: 64px; opacity: 0.9; }
+.loader__bar {
+  width: 140px; height: 1px; background: var(--paper-12); overflow: hidden;
+}
+.loader__bar-fill {
+  display: block; height: 100%; width: 0%;
+  background: var(--patang);
+  transition: width 200ms linear;
+}
+.loader__pct {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em;
+  color: var(--paper-45);
+}
+
+/* ---------- Ambient layers ---------- */
+.grain {
+  position: fixed; inset: -50%; z-index: 100; pointer-events: none;
+  width: 200%; height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  transition: opacity 800ms linear;
+}
+.grain.is-heritage { opacity: 0.06; }
+
+.vignette {
+  position: fixed; inset: 0; z-index: 99; pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(16,20,28,0.5) 100%);
+}
+
+.particles {
+  position: fixed; inset: 0; z-index: 15; pointer-events: none;
+  opacity: 0.35;
+}
+
+/* ---------- Custom cursor (desktop, pointer: fine only) ---------- */
+.cursor-dot, .cursor-ring { display: none; }
+@media (pointer: fine) {
+  .cursor-dot {
+    display: block; position: fixed; z-index: 9998; pointer-events: none;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #fff; mix-blend-mode: difference;
+    transform: translate(-50%, -50%);
+    left: 0; top: 0;
+  }
+  .cursor-ring {
+    display: block; position: fixed; z-index: 9997; pointer-events: none;
+    width: 34px; height: 34px; border-radius: 50%;
+    border: 1px solid var(--paper-45);
+    transform: translate(-50%, -50%);
+    left: 0; top: 0;
+    transition: width 300ms var(--ease-out), height 300ms var(--ease-out),
+                border-color 300ms, box-shadow 300ms;
+  }
+  .cursor-ring.is-hover {
+    width: 54px; height: 54px;
+    border-color: var(--patang);
+    box-shadow: 0 0 24px rgba(255, 90, 31, 0.35);
+  }
+}
+
+/* ---------- Persistent watermark mark ---------- */
+.watermark {
+  position: fixed;
+  top: var(--edge); left: var(--edge);
+  z-index: 80;
+  width: 56px;
+  opacity: 1;
+  transition: opacity 700ms var(--ease-out);
+  pointer-events: none;
+}
+.watermark.is-dim { opacity: 0.35; }
+@media (max-width: 768px) { .watermark { width: 40px; } }
+
+/* ---------- Scroll progress hairline ---------- */
+.scroll-progress {
+  position: fixed; left: 0; bottom: 0; z-index: 95;
+  width: 100%; height: 1px; pointer-events: none;
+}
+.scroll-progress__fill {
+  display: block; height: 100%; width: 100%;
+  background: var(--patang);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+/* ---------- Shared type utilities ---------- */
+.mono {
+  font-family: var(--font-mono);
+  font-size: 12px; font-weight: 400;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--paper-70);
+}
+.overline { display: block; margin-bottom: 20px; }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .grain { transition: none; }
+  .cursor-dot, .cursor-ring { display: none !important; }
+  .particles { display: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Reduced motion: collapse the tall canvas sections, draw one representative
+   frame each, and put all copy back into normal document flow. */
+.reduced .seq-section { height: auto !important; }
+.reduced .seq-sticky {
+  position: static; height: auto; overflow: visible;
+  padding-bottom: 48px;
+}
+.reduced .seq-canvas {
+  position: relative; inset: auto;
+  width: 100%; height: auto; aspect-ratio: 16 / 9;
+}
+.reduced .seq-overlay {
+  position: static !important;
+  opacity: 1 !important; visibility: visible !important;
+  transform: none !important; filter: none !important;
+  transition: none;
+  margin: 48px 6%; max-width: none;
+}
+.reduced .seq-loadbar, .reduced .cut-flash { display: none; }
+.reduced .timeline { position: static; transform: none; width: auto; margin: 24px 6%; flex-wrap: wrap; gap: 18px; }
+.reduced .split span { opacity: 1 !important; transform: none !important; transition: none; }
+.reduced .scroll-hint { display: none; }
+.reduced .why-words span { opacity: 1; transform: none; color: var(--paper); }
+.reduced .matters-phrase { opacity: 1; transform: none; color: var(--paper); }
+.reduced #matters { min-height: auto; padding: var(--section-pad) 6%; }
+.reduced .matters-sticky { position: static; height: auto; }
+
+/* ---------- No-JS fallback ---------- */
+.no-js .loader, .no-js .particles, .no-js .cursor-dot, .no-js .cursor-ring { display: none; }
+.no-js .seq-section { height: auto !important; min-height: 100vh; }
+.no-js .seq-canvas, .no-js .seq-loadbar { display: none; }
+.no-js .seq-sticky { position: static; height: auto; padding: var(--section-pad) 0; }
+.no-js .seq-overlay {
+  position: static !important;
+  opacity: 1 !important; visibility: visible !important;
+  transform: none !important; filter: none !important;
+  margin: 48px 6%;
+}
+.no-js .seq-overlay .split span { opacity: 1 !important; transform: none !important; }
+.no-js .scroll-hint { display: none; }

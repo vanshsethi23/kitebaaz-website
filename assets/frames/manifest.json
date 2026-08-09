@@ -1,0 +1,19 @@
+{
+  "sequences": {
+    "hero": {
+      "count": 120,
+      "desktopBytes": 2835034,
+      "mobileBytes": 1157954
+    },
+    "history": {
+      "count": 120,
+      "desktopBytes": 4212044,
+      "mobileBytes": 1984248
+    },
+    "origin": {
+      "count": 80,
+      "desktopBytes": 1417288,
+      "mobileBytes": 447890
+    }
+  }
+}

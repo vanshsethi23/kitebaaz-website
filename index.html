@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KITEBAAZ — The future home of kite flying</title>
+<meta name="description" content="KITEBAAZ is a cultural institution documenting kite flying in India. Watch. Learn. Fly. सब एक जगह.">
+<link rel="icon" type="image/png" href="assets/brand/mark-paper.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Latin:wdth,wght@75..125,100..800&family=Anek+Devanagari:wdth,wght@75..125,100..800&family=Tiro+Devanagari+Hindi:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css?v=3">
+<link rel="stylesheet" href="css/base.css?v=3">
+<link rel="stylesheet" href="css/sections.css?v=3">
+<link rel="stylesheet" href="css/nav.css?v=3">
+<script>document.documentElement.classList.replace('no-js', 'js');</script>
+</head>
+<body>
+
+<!-- 0. Loader -->
+<div class="loader" id="loader" aria-hidden="true">
+  <img class="loader__mark" src="assets/brand/mark-paper.png" alt="">
+  <div class="loader__bar"><span class="loader__bar-fill" id="loader-fill"></span></div>
+  <span class="loader__pct" id="loader-pct">0%</span>
+</div>
+
+<!-- 1. Ambient layers -->
+<div class="grain" id="grain" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<canvas class="particles" id="particles" aria-hidden="true"></canvas>
+<div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+<!-- Persistent mark watermark -->
+<img class="watermark" id="watermark" src="assets/brand/mark-paper.png" alt="KITEBAAZ kite mark">
+
+<!-- Scroll progress hairline -->
+<div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__fill" id="scroll-progress-fill"></span></div>
+
+<!-- 2. Hero — sequence HERO -->
+<section id="hero" class="seq-section" data-seq="hero" data-count="120">
+  <div class="seq-sticky" id="hero-sticky">
+    <canvas class="seq-canvas" role="img" aria-label="A boy on a Delhi rooftop flies a paper kite into a fight; the rival string is cut and the losing kite falls free over the city."></canvas>
+    <div class="seq-loadbar" aria-hidden="true"></div>
+    <div class="cut-flash" id="cut-flash" aria-hidden="true"></div>
+
+    <div class="seq-overlay" data-show-at="0" data-hide-at="0.22">
+      <h1 class="hero-line split" data-split>Some chase the wind.</h1>
+    </div>
+    <div class="seq-overlay" data-show-at="0.26" data-hide-at="0.46">
+      <p class="hero-line split" data-split>Some learn to control it.</p>
+    </div>
+    <div class="seq-overlay" id="cut-overlay" data-show-at="0.50" data-hide-at="0.66">
+      <p class="cut-shout" lang="hi" aria-label="Woh kaata! The kite is cut.">वो काटा!</p>
+    </div>
+    <div class="seq-overlay" data-show-at="0.76" data-hide-at="0.99">
+      <p class="hero-line hero-line--settle">We preserve its story.</p>
+    </div>
+
+    <div class="scroll-hint" id="scroll-hint" aria-hidden="true">
+      <span class="scroll-hint__line"></span>
+      <span class="mono">Scroll</span>
+    </div>
+  </div>
+</section>
+
+<!-- 2a. History intro card -->
+<div class="history-intro">
+  <p>Every kite has a story before it reaches the sky.</p>
+</div>
+
+<!-- 3. Interactive History — sequence HISTORY (Heritage register) -->
+<section id="history" class="seq-section" data-seq="history" data-count="120">
+  <div class="seq-sticky">
+    <canvas class="seq-canvas" role="img" aria-label="A 3D animated journey through four thousand years of kite history, from ancient China along the Silk Road to India."></canvas>
+    <div class="seq-loadbar" aria-hidden="true"></div>
+
+    <div class="seq-overlay" data-show-at="0.03" data-hide-at="0.15">
+      <h2 class="history-headline">Four thousand years of <span class="deva" lang="hi">विरासत</span>.</h2>
+    </div>
+
+    <div class="timeline" id="timeline" role="group" aria-label="Kite history timeline. Use arrow keys to move between eras.">
+      <button class="timeline__node" data-center="0.06"><span class="timeline__dot"></span><span class="timeline__label">Ancient China</span><span class="timeline__connector" aria-hidden="true"></span></button>
+      <button class="timeline__node" data-center="0.17"><span class="timeline__dot"></span><span class="timeline__label">Silk Road</span><span class="timeline__connector" aria-hidden="true"></span></button>
+      <button class="timeline__node" data-center="0.29"><span class="timeline__dot"></span><span class="timeline__label">Persia</span><span class="timeline__connector" aria-hidden="true"></span></button>
+      <button class="timeline__node" data-center="0.41"><span class="timeline__dot"></span><span class="timeline__label">India</span><span class="timeline__connector" aria-hidden="true"></span></button>
+      <button class="timeline__node" data-center="0.53"><span class="timeline__dot"></span><span class="timeline__label">Mughal Era</span><span class="timeline__connector" aria-hidden="true"></span></button>
+      <button class="timeline__node" data-center="0.65"><span class="timeline__dot"></span><span class="timeline__label">Modern India</span><span class="timeline__connector" aria-hidden="true"></span></button>
+      <button class="timeline__node timeline__node--open-in" data-center="0.77"><span class="timeline__dot"></span><span class="timeline__label">Today</span><span class="timeline__connector" aria-hidden="true"></span></button>
+      <button class="timeline__node timeline__node--open" data-center="0.91"><span class="timeline__dot"></span><span class="timeline__label">Tomorrow</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Why KITEBAAZ Exists — sequence ORIGIN -->
+<section id="why" class="seq-section" data-seq="origin" data-count="80">
+  <div class="seq-sticky">
+    <canvas class="seq-canvas" role="img" aria-label="The KITEBAAZ logo assembles itself: a diamond kite with a charkhi spool resolving out of drifting paper fragments."></canvas>
+    <div class="seq-loadbar" aria-hidden="true"></div>
+
+    <div class="seq-overlay" data-show-at="0.04" data-hide-at="0.28">
+      <h2 class="why-lede">Kite flying is India's most underrated living sport.</h2>
+    </div>
+    <div class="seq-overlay" data-show-at="0.36" data-hide-at="0.68">
+      <div class="why-words" id="why-words">
+        <span>Disappearing stories.</span>
+        <span>Fading craftsmanship.</span>
+        <span>Scattered communities.</span>
+        <span>Vanishing heritage.</span>
+      </div>
+    </div>
+    <!-- 0.82: the mark lands alone. No text over the resolution beat. -->
+  </div>
+</section>
+
+<!-- 5. About KITEBAAZ — Studio register -->
+<section id="about" class="static-section">
+  <div class="about-grid">
+    <div class="about-copy">
+      <h2 class="about-display">Flying isn't the hobby. The culture is.</h2>
+      <div class="about-body">
+        <p>To preserve, celebrate and modernise kite culture.</p>
+        <p>Watch. Learn. Fly. <span lang="hi">सब एक जगह.</span></p>
+        <p>The future home of kite flying. Not a season, not a shop. A standing institution. We document the makers, the wind and the rooftops.</p>
+      </div>
+      <p class="about-pull">KITEBAAZ exists to preserve everything the sky cannot.</p>
+      <p class="about-closing">
+        <span class="reveal-line" data-reveal>The sky was never empty.</span>
+        <span class="reveal-line" data-reveal>You just stopped looking up.</span>
+      </p>
+    </div>
+    <div class="about-spec">
+      <p>DELHI · JAIPUR · BAREILLY<br>EST. 2024<br>PHASE ONE / DEPTH OVER SPREAD</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Founder's Story -->
+<section id="founder" class="static-section">
+  <div class="founder-grid">
+    <div class="founder-portrait" id="founder-portrait">
+      <img src="assets/founder/portrait.jpg" alt="Portrait of the KITEBAAZ founder" onerror="this.remove(); document.getElementById('founder-portrait').insertAdjacentHTML('beforeend', '&lt;span class=&quot;mono&quot;&gt;PORTRAIT / PENDING&lt;/span&gt;');">
+    </div>
+    <div>
+      <p class="founder-open">Every kitebaaz begins with someone else's <span lang="hi">पतंग</span>.</p>
+      <div class="founder-beats">
+        <span class="founder-rail" id="founder-rail" aria-hidden="true"></span>
+        <div class="founder-beat" data-reveal>
+          <span class="marker">Age 8</span>
+          <h3>The sky fills up</h3>
+          <p>Watching his father and uncle fly on Independence Day, when every rooftop in Delhi sends something into the air.</p>
+        </div>
+        <div class="founder-beat" data-reveal>
+          <span class="marker">Two years</span>
+          <h3>Trying. Failing. Trying.</h3>
+          <p>Two years of watching, practicing, and crashing before the string ever behaved.</p>
+        </div>
+        <div class="founder-beat" data-reveal>
+          <span class="marker">Age 10</span>
+          <h3>First solo flight</h3>
+          <p>The kite goes up alone and stays up. From this point, it never really comes down.</p>
+        </div>
+        <div class="founder-beat" data-reveal>
+          <span class="marker">2020</span>
+          <h3>The rooftop era</h3>
+          <p>Lockdown evenings, a charkhi, and one rooftop. The hobby becomes a practice.</p>
+        </div>
+        <div class="founder-beat" data-reveal>
+          <span class="marker">Today</span>
+          <h3>The camera comes up too</h3>
+          <p>KITEBAAZ goes public: vlogs, pech footage, collections, and the people behind the craft.</p>
+        </div>
+      </div>
+      <div class="founder-mission">
+        <span class="mono">MISSION</span>
+        <p>KITEBAAZ exists to document kite flying culture in India and build it into a brand that the culture can rally around. Vansh is taking a lifelong passion, rooted in family, Independence Day skies, the COVID rooftop years, and the makers and stores of Delhi and Jaipur, and turning it into an honest public record of the practice: the flying, the fighting, the festivals, the shops, and the people who make the gear. That documentation earns the credibility for everything else. A marketplace connecting flyers to the best kite and manjha makers across India launches soon, and it is central rather than distant: it gives makers national reach, gives flyers real access, and makes the brand profitable enough to stay independent. KITEBAAZ takes a public position on manjha safety and legality, and will only list products that are legal to sell. Reviving interest in kite flying among Indian youth is a genuine and welcome outcome, but it follows from documenting the culture well rather than from campaigning for it. The first phase is depth over spread: build in the strongholds of Delhi, Jaipur, and Bareilly, where the makers, festivals, and community already are, before going anywhere else.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Why It Matters — monochrome, high impact -->
+<section id="matters">
+  <div class="matters-sticky">
+    <p class="matters-phrase" data-matter>Disappearing traditions.</p>
+    <p class="matters-phrase" data-matter>Forgotten makers.</p>
+    <p class="matters-phrase" data-matter>Declining craftsmanship.</p>
+    <p class="matters-phrase" data-matter>Lost heritage.</p>
+  </div>
+</section>
+
+<!-- 8. Marketplace — Coming Soon -->
+<section id="marketplace" class="static-section">
+  <div class="market-card">
+    <span class="mono overline">MARKETPLACE</span>
+    <h2>Premium products for true kite enthusiasts.</h2>
+    <p class="sub">makers get the nation, flyers get the real thing</p>
+    <p class="market-status">COMING SOON · LEGAL PRODUCTS ONLY · MANJHA SAFETY FIRST</p>
+    <a class="market-cta" href="#rooftop" id="notify-cta">Notify me</a>
+  </div>
+</section>
+
+<!-- 9. Stories — Festival register -->
+<section id="stories" class="static-section">
+  <span class="mono overline">STORIES</span>
+  <h2>From the rooftops</h2>
+  <div class="stories-grid">
+    <button class="story-card story-card--lead" data-yt-id="PyE67jipsyo" aria-label="Play video: Makar Sankranti kite flying in Jaipur">
+      <img class="thumb" src="assets/stories/PyE67jipsyo.jpg" alt="" loading="lazy">
+      <span class="play" aria-hidden="true"></span>
+      <span class="label label--fuchsia">SANKRANTI, JAIPUR</span>
+    </button>
+    <button class="story-card" data-yt-id="Q9u6DxAvNis" aria-label="Play video: Patang Utsav at Baansera">
+      <img class="thumb" src="assets/stories/Q9u6DxAvNis.jpg" alt="" loading="lazy">
+      <span class="play" aria-hidden="true"></span>
+      <span class="label label--sky">PATANG UTSAV, BAANSERA</span>
+    </button>
+    <button class="story-card" data-yt-id="bAhmUBXgI4M" aria-label="Play video: Kite and manjha collection, 15th August">
+      <img class="thumb" src="assets/stories/bAhmUBXgI4M.jpg" alt="" loading="lazy">
+      <span class="play" aria-hidden="true"></span>
+      <span class="label label--yellow">THE KITE STASH</span>
+    </button>
+    <button class="story-card" data-yt-id="Tf7cZLBdyRg" aria-label="Play video: Kite shopping with Somen Ghosh">
+      <img class="thumb" src="assets/stories/Tf7cZLBdyRg.jpg" alt="" loading="lazy">
+      <span class="play" aria-hidden="true"></span>
+      <span class="label">KITE SHOPPING</span>
+    </button>
+  </div>
+</section>
+
+<p class="stories-outro">keep scrolling, the sky is under this page…</p>
+
+<!-- 10. The Rooftop — subscribe -->
+<section id="rooftop" class="static-section">
+  <div class="rooftop-inner">
+    <h2 class="rooftop-deva" lang="hi">ऊपर देखो</h2>
+    <p class="rooftop-lead">The <span class="hl">marketplace</span> opens soon. The rooftop hears it first.</p>
+    <p class="rooftop-sub">India's best kites and manjha, straight from the makers. Join now for first access when the doors open, plus new films and the stories behind the craft.</p>
+    <!--
+      Newsletter endpoint: Google Apps Script web app (backend/Code.gs), deployed
+      from kitebaaz.in@gmail.com. Logs to the "Subscribers" Sheet tab and sends
+      the branded welcome email. See backend/SETUP.md for redeploy steps.
+    -->
+    <form class="rooftop-form" id="rooftop-form" data-endpoint="https://script.google.com/macros/s/AKfycbyywkzD8Rn0wKPhICyhX4LeO7rL7-TqRaPWLg9w8J5tXyWGE_HZgfrd3qlPIkF3Ur_m1Q/exec" novalidate>
+      <input type="email" name="email" id="rooftop-email" placeholder="Your email" aria-label="Your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+    <p class="rooftop-error" id="rooftop-error" role="alert"></p>
+    <p class="rooftop-success" id="rooftop-success" aria-live="polite"></p>
+    <p class="mono rooftop-mono">Never Miss A Wind Change.</p>
+    <p class="mono rooftop-beta">Beta · The archive is open</p>
+  </div>
+</section>
+
+<!-- 11. Footer — the kite disappears -->
+<footer id="site-footer">
+  <div class="footer-kite" id="footer-kite">
+    <img src="assets/brand/mark-paper.png" alt="" width="120">
+    <svg class="footer-string" id="footer-string" viewBox="-40 0 80 180" aria-hidden="true">
+      <path id="footer-string-path" d="M 0 0 L 0 180"></path>
+    </svg>
+  </div>
+  <p class="footer-message" id="footer-message" data-reveal>The sky belongs to everyone.<br>Its stories deserve to live forever.</p>
+  <div class="footer-links">
+    <a href="https://www.youtube.com/@kitebaaz" target="_blank" rel="noopener noreferrer">YouTube</a>
+    <a href="https://www.instagram.com/kitebaaz/" target="_blank" rel="noopener noreferrer">Instagram</a>
+  </div>
+  <a class="footer-email" href="mailto:kitebaaz.in@gmail.com">kitebaaz.in@gmail.com</a>
+  <img class="footer-lockup" src="assets/brand/lockup-paper.png" alt="KITEBAAZ">
+  <p class="footer-legal">© 2026 KITEBAAZ · DELHI</p>
+</footer>
+
+<!-- 12. Bottom navigation -->
+<div class="bottom-nav" id="bottom-nav">
+  <button class="nav-circle" id="audio-btn" aria-label="Ambient sound" aria-expanded="false">
+    <svg class="note-glyph" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M9 18V5l10-2v13" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="6.5" cy="18" r="2.5" stroke-width="1.5"/>
+      <circle cx="16.5" cy="16" r="2.5" stroke-width="1.5"/>
+    </svg>
+    <span class="eq-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+  </button>
+  <a class="nav-pill" href="https://www.youtube.com/@kitebaaz" target="_blank" rel="noopener noreferrer">
+    <span class="dot" aria-hidden="true"></span>Subscribe
+  </a>
+  <button class="nav-circle" id="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="menu-overlay">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 7h16M4 12h16M4 17h16" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </button>
+</div>
+
+<!-- Menu overlay -->
+<div class="menu-overlay" id="menu-overlay" role="dialog" aria-modal="true" aria-label="Menu">
+  <button class="menu-close" id="menu-close" aria-label="Close menu">×</button>
+  <nav>
+    <a href="#hero" style="--i:0">Hero</a>
+    <a href="#history" style="--i:1">History</a>
+    <a href="#why" style="--i:2">Why</a>
+    <a href="#about" style="--i:3">About</a>
+    <a href="#founder" style="--i:4">Founder</a>
+    <a href="#matters" style="--i:5">Why It Matters</a>
+    <a href="#marketplace" style="--i:6">Marketplace</a>
+    <a href="#stories" style="--i:7">Stories</a>
+  </nav>
+  <span class="menu-divider" aria-hidden="true"></span>
+  <nav class="ext">
+    <a href="https://www.youtube.com/@kitebaaz" target="_blank" rel="noopener noreferrer" style="--i:8">YouTube</a>
+    <a href="https://www.instagram.com/kitebaaz/" target="_blank" rel="noopener noreferrer" style="--i:9">Instagram</a>
+    <a href="mailto:kitebaaz.in@gmail.com" style="--i:10">Email</a>
+  </nav>
+</div>
+
+<!-- Audio panel -->
+<div class="audio-panel" id="audio-panel" aria-label="Ambient sound tracks"></div>
+
+<!-- Subscribe confirmation dialog -->
+<div class="sub-dialog" id="sub-dialog" role="dialog" aria-modal="true" aria-labelledby="sub-dialog-title" aria-describedby="sub-dialog-body" hidden>
+  <div class="sub-dialog__backdrop" data-dialog-close></div>
+  <div class="sub-dialog__panel">
+    <span class="sub-dialog__bar" aria-hidden="true"></span>
+    <button class="sub-dialog__close" aria-label="Close" data-dialog-close>×</button>
+    <img class="sub-dialog__mark" src="assets/brand/mark-ink.png" alt="">
+    <h3 class="sub-dialog__title" id="sub-dialog-title">You&rsquo;re on the rooftop.</h3>
+    <p class="sub-dialog__body" id="sub-dialog-body">Watch the sky. New films, maker stories, and first access to the marketplace, straight to your inbox.</p>
+    <button class="sub-dialog__done" id="sub-dialog-done">Done</button>
+  </div>
+</div>
+
+<script src="js/sequence.js"></script>
+<script src="js/dwell.js"></script>
+<script src="js/ambient.js"></script>
+<script src="js/scroll.js"></script>
+<script src="js/nav.js?v=3"></script>
+<script src="js/audio.js"></script>
+</body>
+</html>

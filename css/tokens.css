@@ -1,0 +1,51 @@
+/* KITEBAAZ — design tokens. Colour from the brand sheet, exact. */
+:root {
+  /* Core. Present in every register, without exception. */
+  --ink:    #10141C;
+  --paper:  #F4EFE6;
+  --patang: #FF5A1F;
+
+  /* Orange ramp. 500 is the brand. 700 is the only one that may carry text on Paper. */
+  --o-50:  #F5E3D6;
+  --o-100: #F6CEBA;
+  --o-300: #FA9D79;
+  --o-500: #FF5A1F;
+  --o-700: #B03B13;
+  --o-900: #71230A;
+
+  /* Festival extension. Max three at once, always on Ink or Paper, never on each other. */
+  --fuchsia: #E5197F;
+  --yellow:  #FFC300;
+  --sky:     #16A6C9;
+  --green:   #1E9E5A;
+
+  /* Heritage extension. Two colours only. This register gets texture instead of hue. */
+  --jute: #C9A46A;
+  --clay: #A8543A;
+
+  /* Derived surfaces */
+  --ink-90:   rgba(16, 20, 28, 0.90);
+  --paper-70: rgba(244, 239, 230, 0.70);
+  --paper-45: rgba(244, 239, 230, 0.45);
+  --paper-12: rgba(244, 239, 230, 0.12);
+  --paper-06: rgba(244, 239, 230, 0.06);
+
+  /* Type */
+  --font-latin: 'Anek Latin', system-ui, sans-serif;
+  --font-deva:  'Anek Devanagari', 'Anek Latin', system-ui, sans-serif;
+  --font-serif: 'Tiro Devanagari Hindi', Georgia, serif;
+  --font-mono:  'JetBrains Mono', ui-monospace, monospace;
+
+  /* Register dials: the width axis is the register system. */
+  --wdth-studio: 'wdth' 75;
+  --wdth-heritage: 'wdth' 100;
+  --wdth-festival: 'wdth' 125;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Spacing rhythm */
+  --edge: clamp(20px, 4vw, 44px);
+  --section-pad: clamp(96px, 14vh, 180px);
+}
