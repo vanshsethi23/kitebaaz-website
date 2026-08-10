@@ -2,18 +2,18 @@
   "sequences": {
     "hero": {
       "count": 120,
-      "desktopBytes": 2835034,
-      "mobileBytes": 1157954
+      "desktopBytes": 5062278,
+      "mobileBytes": 1308724
     },
     "history": {
       "count": 120,
-      "desktopBytes": 4212044,
-      "mobileBytes": 1984248
+      "desktopBytes": 7529962,
+      "mobileBytes": 2395980
     },
     "origin": {
       "count": 80,
-      "desktopBytes": 1417288,
-      "mobileBytes": 447890
+      "desktopBytes": 4672078,
+      "mobileBytes": 550652
     }
   }
 }

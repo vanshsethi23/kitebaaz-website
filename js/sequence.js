@@ -95,9 +95,16 @@ class FrameSequence {
     const img = this.frames[i];
     const cw = this.canvas.width, ch = this.canvas.height;
     const iw = img.width, ih = img.height;
-    // cover-fit, centre the overflow
-    const s = Math.max(cw / iw, ch / ih);
+    // Landscape viewports: cover-fit, centre the overflow.
+    // Portrait viewports (phones): contain-fit so the full frame stays visible,
+    // letterboxed on Ink like a cinema strip, instead of a brutal centre crop.
+    const portrait = ch > cw * 1.05;
+    const s = portrait ? Math.min(cw / iw, ch / ih) : Math.max(cw / iw, ch / ih);
     const dw = iw * s, dh = ih * s;
+    if (portrait) {
+      this.ctx.fillStyle = '#10141C';
+      this.ctx.fillRect(0, 0, cw, ch);
+    }
     this.ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
     this.lastDrawn = i;
   }
